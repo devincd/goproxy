@@ -16,7 +16,7 @@ func main() {
 	flag.Parse()
 	fmt.Printf("Listening: %v\nProxying: %v\n\n", *localAddr, *remoteAddr)
 
-	listener, err := net.Listen("tcp", *localAddr)
+	listener, err := net.Listen("tcp4", *localAddr)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -33,7 +33,7 @@ func main() {
 }
 
 func DoProxy(conn net.Conn) {
-	conn2, err := net.Dial("tcp", *remoteAddr)
+	conn2, err := net.Dial("tcp4", *remoteAddr)
 	if err != nil {
 		log.Println("error dialing remote addr", err)
 		return
